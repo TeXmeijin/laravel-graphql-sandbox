@@ -1,61 +1,17 @@
-# docker-laravel 🐳
+# laravel graphql sandbox
 
-![License](https://img.shields.io/github/license/ucan-lab/docker-laravel?color=f05340)
-![Stars](https://img.shields.io/github/stars/ucan-lab/docker-laravel?color=f05340)
-![Issues](https://img.shields.io/github/issues/ucan-lab/docker-laravel?color=f05340)
-![Forks](https://img.shields.io/github/forks/ucan-lab/docker-laravel?color=f05340)
+LaravelでGraphQLを実装するうえで色々動作を試す検証用リポジトリ。
 
-## Introduction
+## 前提
 
-Build a simple laravel development environment with docker-compose.
+- Eloquent Modelに依存するとデータベースと密結合になって嫌なのでやらない
 
-## Usage
+## やりたいこと
 
-```bash
-$ git clone git@github.com:ucan-lab/docker-laravel.git
-$ cd docker-laravel
-$ make create-project # Install the latest Laravel project
-$ make install-recommend-packages # Not required
-```
+- [ ] バリデーションエラーをUseCaseレイヤー以降で起こしたときにハンドリングできるか
+- [ ] カスタムなリゾルバの実装。Eloquent Modelと自動でマッピングする的なことはカスタムでどうやって実装する？
+- [ ] アクセスログの実装。全部/graphqlに来るので、投げられたクエリのロギングはどうする？
 
-http://localhost
+## 考えたいこと
 
-Read this [Makefile](https://github.com/ucan-lab/docker-laravel/blob/master/Makefile).
-
-## Tips
-
-Read this [Wiki](https://github.com/ucan-lab/docker-laravel/wiki).
-
-## Container structure
-
-```bash
-├── app
-├── web
-└── db
-```
-
-### app container
-
-- Base image
-  - [php](https://hub.docker.com/_/php):8.0-fpm-buster
-  - [composer](https://hub.docker.com/_/composer):2.0
-
-### web container
-
-- Base image
-  - [nginx](https://hub.docker.com/_/nginx):1.18-alpine
-  - [node](https://hub.docker.com/_/node):14.2-alpine
-
-### db container
-
-- Base image
-  - [mysql](https://hub.docker.com/_/mysql):8.0
-
-#### Persistent MySQL Storage
-
-By default, the [named volume](https://docs.docker.com/compose/compose-file/#volumes) is mounted, so MySQL data remains even if the container is destroyed.
-If you want to delete MySQL data intentionally, execute the following command.
-
-```bash
-$ docker-compose down -v && docker-compose up
-```
+- [ ] LaravelでGraphQLを実装するのがベターなのか？実際にはHasuraなどを新たに立ててしまうほうが取り回しがいいのでは？
